@@ -8,12 +8,12 @@ The server operates as follows:
 
 1. **Setup**: The user sets the working directory to the one containing the website files.
 2. **Running the Server**: To start the server, simply run the Python script. The server listens for incoming connections on port 80, the standard port for HTTP.
-3. **Handling Requests**: The server is designed to handle only HTTP GET requests. When a request is received, it checks the requested path for security risks related to directory traversal, ensuring that only valid files are accessible.
-4. **Output**: While running, the server displays for each connection:
+3. **Handling Requests**: The server is designed to handle only HTTP GET requests. When a request is received, it checks the requested path for security risks related to directory traversal, ensuring that only valid files are accessible. If a directory is requested, it automatically serves `index.html`.
+4. **Output**: For each connection, the server logs:
     - The IP address of the connecting computer.
     - The port the connection was accepted on.
     - The received HTTP request.
-    - The HTTP response indicating whether the requested file exists or not.
+    - The HTTP response: `200 OK` for a valid request, `404 Not Found` for missing files, or `400 Bad Request` for invalid requests.
 
 ## Requirements
 
@@ -26,9 +26,14 @@ To run the server:
 
 1. Change the working directory to the one containing your website files.
 2. Execute the Python script:
-```
-python web-server.py
-```
+
+    ```
+    python web-server.py
+    ```
+
+    Since port 80 is a privelaged port, administrator privelages may be required (e.g. `sudo` for Linux)
+
+3. The server will display the local machine’s IP address, which other users on the network can use to access the hosted website via a browser.
 
 ## Security
 
